@@ -1,4 +1,4 @@
-# NeuralHJB
+# NeuralSOC
 Code for method proposed in [A Neural Network Approach for Stochastic Optimal Control](https://arxiv.org/pdf/2209.13104.pdf).
 ## Setup
 Run these commands.
@@ -16,7 +16,7 @@ Note: For FEninCS based experiments, Anaconda installation of FEniCS version 201
 #### For section 4.1
 2D obstacle avoiding problem
 ```
-python NeuralSOC/train_2d.py --prob Trajectory2 --net ResNet_hessquik --track_z True --n_iters 6000 --val_freq 100 --viz_freq 400 --print_freq 100 --lr 0.01 --beta '1.0, 1.0, 0.0, 1.0, 1.0, 0.0' --lr_freq 1800
+python train_2d.py --prob Trajectory2 --net ResNet_hessquik --track_z True --n_iters 6000 --val_freq 100 --viz_freq 400 --print_freq 100 --lr 0.01 --beta '1.0, 1.0, 0.0, 1.0, 1.0, 0.0' --lr_freq 1800
 ```
 Solving the HJB equation corresponding to the 2D trajectory planning problem using a finite element method
 ```
@@ -29,11 +29,11 @@ python plotter.py
 #### For section 4.2
 For a more detailed comparison regarding the 100D Benchmark problem we recommend our separate implementation using Tensorflow, which can be found [here](https://github.com/EmoryMLIP/FBSNNs), that said a pytorch version of the problem is also available.
 ```
-python train_100d_new.py --prob Benchmark --net ResNet_OTflow --track_z True --n_iters 50000 --val_freq 100 --viz_freq 100 --print_freq 100 --lr_freq 20000 --lr 0.001 --beta '1.0, 1.0, 1.0, 0.0, 20.0, 0.0' --m 64
+python train_100d.py --prob Benchmark --net ResNet_OTflow --track_z True --n_iters 50000 --val_freq 100 --viz_freq 1000 --print_freq 100 --lr_freq 20000 --lr 0.001 --beta '1.0, 1.0, 1.0, 0.0, 20.0, 0.0' --m 64
 ```
 100D problem with shifted target state
 ```
-python NeuralSOC/train_100d.py --prob Benchmark2 --net ResNet_OTflow --track_z True --n_iters 20000 --val_freq 100 --viz_freq 100 --print_freq 100 --lr_freq 8000 --lr 0.002 --beta '10.0, 0.1, 0.1, 0.0, 1.0, 0.0' --m 64
+python train_100d.py --prob Benchmark2 --net ResNet_OTflow --track_z True --n_iters 20000 --val_freq 100 --print_freq 100 --lr_freq 8000 --lr 0.002 --beta '10.0, 0.1, 0.1, 0.0, 1.0, 0.0' --m 64
 ```
 Plotter for section 4.2
 ```
