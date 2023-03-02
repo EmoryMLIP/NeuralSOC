@@ -3,8 +3,7 @@ Code for method proposed in [A Neural Network Approach for Stochastic Optimal Co
 ## Setup
 Run these commands.
 ```
-pip3 install --upgrade setuptools
-sudo python3 setup.py install
+pip install -r install.txt 
 ```
 A portion of the experiments require the installation of FeniCS, installation guide for FeniCS can be found [here](https://fenicsproject.org/download/archive/). FeniCS can also be installed on Colab, refer to [this](https://fem-on-colab.github.io/packages.html) guide to run the experiments on Colab.
  
