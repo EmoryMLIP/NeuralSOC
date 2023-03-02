@@ -5,7 +5,9 @@ Run these commands.
 ```
 pip install -r install.txt 
 ```
-A portion of the experiments require the installation of FeniCS, installation guide for FeniCS can be found [here](https://fenicsproject.org/download/archive/). FeniCS can also be installed on Colab, refer to [this](https://fem-on-colab.github.io/packages.html) guide to run the experiments on Colab.
+A portion of the experiments require the installation of FeniCS, installation guide for FeniCS can be found [here](https://fenicsproject.org/download/archive/). FeniCS can also be installed on Colab, refer to [this](https://fem-on-colab.github.io/packages.html) guide to run the experiments on Colab. As an example one can try out some of our experiments here:
+
+[NeuralSOC_test](https://github.com/EmoryMLIP/NeuralHJB/blob/fin/NeuralSOC_test.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1jnlA3Kdwvkeo8dEeFtoIC06jzHE92uAn?usp=sharing) 
  
 Note: For FEninCS based experiments, Anaconda installation of FEniCS version 2019.1.0 on Linux system with Ubuntu 20.04.3 is used with the following dependencies:
 - FEniCS==2019.1.0

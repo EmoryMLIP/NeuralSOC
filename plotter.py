@@ -69,6 +69,7 @@ if __name__ == '__main__':
     sampler = PMPSampler(Phi, prob, prob.t,prob.T,20)
 
     z_all = []
+    n_models = len(os.listdir(args.resume))
     for filename in os.listdir(args.resume):
         logger.info(' ')
         logger.info("loading model: {:}".format(filename))
@@ -90,7 +91,7 @@ if __name__ == '__main__':
     np.save('z_all.npy',z_all)
     
     Phi_all = []
-    sol_all = np.zeros((21,2560,1))
+    sol_all = np.zeros((21,n_models*256,1))
     Phi0 = 0.0; J0 = 0.0
     sampler2 = PMPSampler(Phi, prob, prob.t,prob.T,200) # redefine sampler with smaller time steps for better accuracy
     for filename in os.listdir(args.resume):
@@ -98,7 +99,7 @@ if __name__ == '__main__':
         checkpt = torch.load(ff)
         Phi.net.load_state_dict(checkpt["state_dict"])
         
-        Phi_tmp = torch.zeros(21,2560,1)
+        Phi_tmp = torch.zeros(21,n_models*256,1)
         # forward sampling
         for i in range(21):
             s = 0.05*i
@@ -118,11 +119,11 @@ if __name__ == '__main__':
     
     for i in range(20):
         u0.vector()[:] = sol_array[-10*i-1,:,:].reshape(150**2)
-        for j in range(2560):
+        for j in range(n_models*256):
             sol_all[i,j,0] = u0(z_all[i,j,:])
     # hard code terminal condition
     u0.vector()[:] = 50*np.sum((V.tabulate_dof_coordinates()-np.array([[1.5,1.5]]))**2,1)
-    for j in range(2560):
+    for j in range(n_models*256):
             sol_all[-1,j,0] = u0(z_all[-1,j,:])
     
     
@@ -345,8 +346,8 @@ if __name__ == '__main__':
 
     # test and print J at x_init = [-1.5,-1.5]
     logger.info('fixing initial state x = [-1.5,-1.5]')
-    logger.info('Phi = {:.4e}'.format(Phi0/10))
-    logger.info('J = {:.4e}'.format(J0/10))
+    logger.info('Phi = {:.4e}'.format(Phi0/n_models))
+    logger.info('J = {:.4e}'.format(J0/n_models))
     
     # same for fenics solution
     u0.vector()[:] = sol_array[-1,:,:].reshape(150**2)
@@ -386,9 +387,9 @@ if __name__ == '__main__':
     logger.info('Fenics J = {:.4e}'.format((L+G).detach().numpy()))
     
     
-    absolute_err = np.zeros((10,3))
-    relative_err = np.zeros((10,3))
-    for i in range(10):
+    absolute_err = np.zeros((n_models,3))
+    relative_err = np.zeros((n_models,3))
+    for i in range(n_models):
         absolute_err[i,0] = np.mean(np.abs(Phi_all[0,:,i] - sol_all[0,:,0]))
         absolute_err[i,1] = np.mean(np.abs(Phi_all[10,:,i] - sol_all[10,:,0]))
         absolute_err[i,2] = np.mean(np.abs(Phi_all[18,:,i] - sol_all[18,:,0]))
