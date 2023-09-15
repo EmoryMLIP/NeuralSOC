@@ -28,10 +28,14 @@ Plotter for section 4.1
 ```
 python plotter.py
 ```
-#### For section 4.2-4.3
+#### For section 4.2
 For a more detailed comparison regarding the 100D Benchmark problem we recommend our separate implementation using Tensorflow, which can be found [here](https://github.com/EmoryMLIP/FBSNNs), that said a pytorch version of the problem is also available.
 ```
 python train_100d.py --prob Benchmark --net ResNet_OTflow --track_z True --n_iters 50000 --val_freq 100 --viz_freq 1000 --print_freq 100 --lr_freq 20000 --lr 0.001 --beta '1.0, 1.0, 1.0, 0.0, 20.0, 0.0' --m 64
+```
+100D problem starting with random initial states
+```
+python train_100d.py --prob Benchmark --net ResNet_OTflow --track_z True --n_iters 50000 --val_freq 100 --viz_freq 1000 --print_freq 100 --lr_freq 18000 --lr 0.001 --beta '1.0, 1.0, 1.0, 0.0, 5.0, 0.0' --m 64 --init Random
 ```
 100D problem with shifted target state
 ```
@@ -41,7 +45,7 @@ Plotter for section 4.2
 ```
 python plotter2.py
 ```
-#### For section 4.4
+#### For section 4.3
 Train the quadcopter problem
 ```
 python train_quad.py
