@@ -37,6 +37,7 @@ parser.add_argument('--save'    , type=str, default='experiments/oc/run', help="
 parser.add_argument('--gpu'     , type=int, default=0, help="send to specific gpu")
 parser.add_argument('--prec'    , type=str, default='single', choices=['single','double'], help="single or double precision")
 parser.add_argument('--track_z' , type=str, choices=['False', 'True'], default='False', help="to track gradients for state")
+parser.add_argument('--init', choices=['Fixed', 'Random'],   type=str, default='Fixed')
 
 parser.add_argument('--resume'  , type=str, default=None, help="for loading a pretrained model")
 parser.add_argument('--n_iters', type=int, default=2000)
@@ -87,6 +88,11 @@ if __name__ == '__main__':
     
     if args.prob == 'Benchmark':
         from BenchmarkProblem import BenchmarkProblem
+        if args.init == "Random":
+        # switch the initial state sampling from fixed to random
+            def x_init_tmp(self,nex):
+                return 0.5*torch.randn(nex,self.d)
+            BenchmarkProblem.x_init = x_init_tmp
         prob = BenchmarkProblem()
     elif args.prob == 'Benchmark2':
         from BenchmarkProblem import BenchmarkProblem
