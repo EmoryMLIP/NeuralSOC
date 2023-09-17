@@ -63,7 +63,7 @@ class QuadcopterProblem(AbstractOCProblem):
         
     def f(self,s,z,u):
         f7c, f8c, f9c = self.ff(z)
-        out = torch.cat((z[:, 6:], (u[:,[0]] / self.mass) * f7c.view(-1,1), (u[:,[0]] / self.mass) * f7c.view(-1,1),
+        out = torch.cat((z[:, 6:], (u[:,[0]] / self.mass) * f7c.view(-1,1), (u[:,[0]] / self.mass) * f8c.view(-1,1),
                 (u[:,[0]] / self.mass) * f9c.view(-1,1) - self.grav, u[:,1:]),dim=1)
         return out    
         
