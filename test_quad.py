@@ -19,7 +19,7 @@ import argparse
 
 parser = argparse.ArgumentParser('Quadcopter evaluation')
 parser.add_argument('--pth1'  , type=str, default='experiments/singlequad_nn_checkpt.pth') 
-parser.add_argument('--pth2'  , type=str, default='experiments/QuadcopterProblem_Phi_OTflow_PMPSampler_track-z_False_betas_0_0_0_0_1_0_m128_2023_07_13_20_45_28_checkpt.pth') 
+parser.add_argument('--pth2'  , type=str, default='experiments/QuadcopterProblem_Phi_OTflow_PMPSampler_track-z_False_betas_0_0_0_0_1_0_m128_2023_09_17_15_06_19_checkpt.pth') 
 parser.add_argument('--save'    , type=str, default='experiments/output/')
 args = parser.parse_args()
 
