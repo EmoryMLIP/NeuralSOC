@@ -2,12 +2,13 @@
 LQR problems represent a large class of problems in both deterministic and stochastic optimal control problems. We here test our approach on a relatively simple example. We consider the following problem 
 
 $$
-\begin{aligned}
-\min_{\mathbf{u}_{t,\mathbf{x}}} \quad & \mathbb{E} \left\{ 50 \cdot \|\mathbf{z}(1)\|^2 + \int_0^1 \frac{1}{2} \|\mathbf{u}(s) \|^2 {\rm d} s  \right\}\\
+\begin{align}
+\min_{\mathbf{u}_{t,\mathbf{x}}} \quad & \mathbb{E} \lbrace 50 \cdot ||\mathbf{z}(1)||^2 + \int_0^1 \frac{1}{2} ||\mathbf{u}(s) ||^2 {\rm d} s  \rbrace\\
 \text{subject to  }   \quad & \text{d} {\mathbf{z}}(s) = \mathbf{u}(s) + \sigma \text{d} {W}(s), \;\; s\in[0,1] \\
 & \mathbf{z}(0) = \mathbf{x} = [-3,-3]^\top,
-\end{aligned}
+\end{align}
 $$
+
 here we select constant $\sigma =0.4$. The problem has linear dynamics with quadratic cost, and therefore exhibits the standard form of a stochastic LQR problem. 
 
 The most common way to treat a LQR problem is to solve the corresponding Riccati equation, with many tutorials available, one can test using the example with the following code:
